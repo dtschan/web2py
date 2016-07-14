@@ -5,12 +5,12 @@ LABEL Vendor="RHEL"
 ENV APACHE_RUN_USER apache 
 ENV APACHE_RUN_GROUP apache 
 
-ENV http_proxy http://proxy.eu.novartis.net:2011
-ENV https_proxy http://proxy.eu.novartis.net:2011
-ENV HTTP_PROXY http://proxy.eu.novartis.net:2011
-ENV HTTPS_PROXY http://proxy.eu.novartis.net:2011
-ENV no_proxy localhost,.eu.novartis.net,172.30.113.233,127.0.0.1
-ENV NO_PROXY localhost,.eu.novartis.net,172.30.113.233,127.0.0.1
+#ENV http_proxy http://proxy.eu.novartis.net:2011
+#ENV https_proxy http://proxy.eu.novartis.net:2011
+#ENV HTTP_PROXY http://proxy.eu.novartis.net:2011
+#ENV HTTPS_PROXY http://proxy.eu.novartis.net:2011
+#ENV no_proxy localhost,.eu.novartis.net,172.30.113.233,127.0.0.1
+#ENV NO_PROXY localhost,.eu.novartis.net,172.30.113.233,127.0.0.1
 
 EXPOSE 8081
 RUN yum clean all ; yum -y install rpm-build rpmdevtools tar wget zip unzip ksh
@@ -34,4 +34,4 @@ RUN cd /var/www/html && wget https://github.com/web2py/web2py/archive/master.zip
 RUN cd /var/www/html && unzip web2py.zip  && mv web2py-master web2py
 RUN cd /var/www/html/web2py && python setup.py install
 
-CMD ["/usr/sbin/httpd -D FOREGROUND 2>&1 | tee /tmp/httpd.log"] 
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
